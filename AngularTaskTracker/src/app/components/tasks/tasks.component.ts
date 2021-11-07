@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { takeLast } from 'rxjs';
 import { TaskService } from 'src/app/services/task.service';
 import { ITask } from '../../api/models';
 
@@ -14,5 +15,16 @@ export class TasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.taskService.getTasks().subscribe((tasks) => (this.tasks = tasks));
+  }
+
+  deleteTask(taskToDelete: ITask) {
+    this.taskService
+      .deleteTask(taskToDelete)
+      .subscribe(
+        () =>
+          (this.tasks = this.tasks.filter(
+            (task) => task.id !== taskToDelete.id
+          ))
+      );
   }
 }

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { TASKS } from 'src/app/api/mock-tasks';
 import { ITask } from 'src/app/api/models';
 
 @Injectable({
@@ -14,5 +13,10 @@ export class TaskService {
 
   getTasks(): Observable<ITask[]> {
     return this.http.get<ITask[]>(this.apiUrl);
+  }
+
+  deleteTask(task: ITask): Observable<ITask> {
+    const deleteUrl = `${this.apiUrl}/${task.id}`;
+    return this.http.delete<ITask>(deleteUrl);
   }
 }

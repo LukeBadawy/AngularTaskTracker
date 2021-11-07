@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ITask } from 'src/app/api/models';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
@@ -9,9 +9,16 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 })
 export class TaskItemComponent implements OnInit {
   @Input() task: ITask | undefined;
+  @Output() onDeleteTask: EventEmitter<ITask> = new EventEmitter();
+
   faTimes = faTimes;
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  onDelete(task: ITask | undefined) {
+    this.onDeleteTask.emit(task);
+    console.log('cross clicked', task);
+  }
 }
