@@ -1,0 +1,15 @@
+.c-form {
+  margin-bottom: 32px;
+
+  &-input {
+    &__checkbox {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    &__label {
+      margin-right: 16px;
+    }
+  }
+}
